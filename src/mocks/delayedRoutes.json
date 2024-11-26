@@ -1,0 +1,38 @@
+[
+  {
+    "distance": 13,
+    "id": 1,
+    "mainRoad": "Monash Fwy Out",
+    "roadNameEnd": "Eastlink",
+    "roadNameStart": "Kings Way",
+    "trafficStatus": "red",
+    "travelTime": 45
+  },
+  {
+    "distance": 15,
+    "id": 2,
+    "mainRoad": "Monash Fwy Out",
+    "roadNameEnd": "Eastlink",
+    "roadNameStart": "Kings Way",
+    "trafficStatus": "red",
+    "travelTime": 28
+  },
+  {
+    "distance": 5,
+    "id": 3,
+    "mainRoad": "Western Ring Rd",
+    "roadNameEnd": "Western Fwy",
+    "roadNameStart": "West Gate Fwy",
+    "trafficStatus": "yellow",
+    "travelTime": 5
+  },
+  {
+    "distance": 15,
+    "id": 4,
+    "mainRoad": "Eastern Fwy",
+    "roadNameEnd": "Springvale Rd",
+    "roadNameStart": "Hoddle St",
+    "trafficStatus": "yellow",
+    "travelTime": 28
+  }
+]
