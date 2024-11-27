@@ -6,13 +6,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
 import throttle from "lodash.throttle";
 
-import getRampAlgorithms, { Ramps } from "../../mocks/getRampAlgorithms";
 import {
-  DEFAULT_BACKGROUND_COLOUR,
+  ACCORDION_BACKGROUND_COLOUR,
   LIGHT_GREY,
   PIE_CHART_COLOURS,
   StyledAccordion,
 } from "../../utils/commonStyles";
+import getRampAlgorithms, { Ramps } from "../../utils/getRampAlgorithms";
 
 interface ChartData {
   name: string;
@@ -80,12 +80,12 @@ const RampChart = () => {
                 cy="50%"
                 data={chartData}
                 dataKey="value"
-                fill="#8884d8"
                 innerRadius={60}
                 label={({ x, y, index }) => {
                   const percentage = total
                     ? Math.round((chartData[index].value / total) * 100)
                     : 0;
+
                   return (
                     <text
                       dominantBaseline="central"
@@ -129,7 +129,7 @@ const Container = styled.div`
 
 const ChartWrapper = styled.div`
   align-items: center;
-  background-color: ${DEFAULT_BACKGROUND_COLOUR};
+  background-color: ${ACCORDION_BACKGROUND_COLOUR};
   display: flex;
   justify-content: center;
   padding: 1rem;

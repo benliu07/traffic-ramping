@@ -2,7 +2,11 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Dashboard } from "./pages";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { MEDIUM_GREY } from "./utils/commonStyles";
+import {
+  APP_BACKGROUND_COLOUR,
+  MEDIUM_GREY,
+  WHITE,
+} from "./utils/commonStyles";
 
 const theme = createTheme({
   typography: {
@@ -27,9 +31,9 @@ function App() {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: #121212;
+    background-color: ${APP_BACKGROUND_COLOUR};
     box-sizing: border-box;
-    color: #ffffff;
+    color: ${WHITE};
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     margin: 0;

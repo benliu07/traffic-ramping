@@ -56,7 +56,7 @@ const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
           </Typography>
         </Grid>
         <Grid data-testid="weather-icon" size={6}>
-          <BsCloudSun size={"7rem"} />
+          <BsCloudSun size="7rem" />
         </Grid>
       </Grid>
       <Stack direction="column" flex="auto" textAlign="left">
