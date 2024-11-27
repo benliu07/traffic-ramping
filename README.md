@@ -12,6 +12,14 @@ Due to how frequently the ramp chart was being updated I decided to throttle the
 
 I deployed the application via [surge.sh](https://surge.sh/) as it provides a quick deploy in seconds via the command line without needing to commit build artefacts into a dedicated repository. Here is the deployed link: [traffic-ramping.sh](https://traffic-ramping.surge.sh/).
 
+## Compromises due to time constraints
+
+Stopping the ramp chart from re-rendering when the ramp chart accordion is closed.
+
+Including Storybook tests for visual regression testing in the future for a production grade application is ideal.
+
+Adding more support for accessbility features.
+
 ## Available Scripts
 
 In the project directory, you can run:
