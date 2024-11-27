@@ -52,8 +52,13 @@ const RampChart = () => {
 
     const intervalId = getRampAlgorithms(onUpdate);
 
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => {
+      clearInterval(intervalId);
+      throttledUpdateChartData.cancel();
+    };
+  }, [throttledUpdateChartData]);
+
+  const total = chartData.reduce((sum, { value }) => sum + value, 0);
 
   return (
     <Container>
@@ -77,22 +82,26 @@ const RampChart = () => {
                 dataKey="value"
                 fill="#8884d8"
                 innerRadius={60}
-                label={({ x, y, index }) => (
-                  <text
-                    dominantBaseline="central"
-                    fill={PIE_CHART_COLOURS[index % PIE_CHART_COLOURS.length]}
-                    fontSize={"1rem"}
-                    fontWeight="bold"
-                    textAnchor="middle"
-                    x={x}
-                    y={y}
-                  >
-                    {`${chartData.length > 0 && chartData[index].value}%`}
-                  </text>
-                )}
+                label={({ x, y, index }) => {
+                  const percentage = total
+                    ? Math.round((chartData[index].value / total) * 100)
+                    : 0;
+                  return (
+                    <text
+                      dominantBaseline="central"
+                      fill={PIE_CHART_COLOURS[index % PIE_CHART_COLOURS.length]}
+                      fontSize={"1rem"}
+                      fontWeight="bold"
+                      textAnchor="middle"
+                      x={x}
+                      y={y}
+                    >
+                      {percentage}%
+                    </text>
+                  );
+                }}
                 labelLine={false}
                 outerRadius={90}
-                paddingAngle={0}
               >
                 {chartData.map((_, index) => (
                   <Cell
@@ -111,7 +120,7 @@ const RampChart = () => {
 
 const Container = styled.div`
   max-width: 400px;
-  padding: 1.5rem;
+  padding: 0.75rem 1.5rem 1.5rem;
 
   @media (max-width: 768px) {
     max-width: none;

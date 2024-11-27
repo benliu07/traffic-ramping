@@ -1,5 +1,6 @@
 {
   "chanceOfRain": 34,
+  "city": "Melbourne",
   "humidity": 78,
   "temperature": 32,
   "tomorrowTemperature": 30,

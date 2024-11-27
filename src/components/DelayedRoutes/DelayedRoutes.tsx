@@ -13,6 +13,7 @@ import {
   StyledAccordion,
   WHITE,
 } from "../../utils/commonStyles";
+import Stack from "@mui/material/Stack";
 
 const DelayedRoutes = () => {
   return (
@@ -37,10 +38,15 @@ const DelayedRoutes = () => {
               travelTime,
             }) => (
               <TrafficStatusContainer key={id}>
-                <TrafficStatus>
-                  <CircleWrapper>
+                <Stack alignItems="center" direction="row" gap={1}>
+                  <Stack
+                    alignItems="center"
+                    justifyContent="center"
+                    height="1rem"
+                    width="1rem"
+                  >
                     <TrafficLight $colour={trafficStatus} />
-                  </CircleWrapper>
+                  </Stack>
                   <Typography
                     sx={{ color: LIGHT_GREY, flex: 1 }}
                     variant="body1"
@@ -48,14 +54,22 @@ const DelayedRoutes = () => {
                     {mainRoad}
                   </Typography>
                   <Typography variant="caption">{distance}km</Typography>
-                </TrafficStatus>
-                <TrafficStatus>
+                </Stack>
+                <Stack alignItems="center" direction="row" gap={1}>
                   <BsArrowDown />
-                  <DirectionWrapper>
+                  <Stack direction="column" flex={1}>
                     <Typography variant="caption">{roadNameStart}</Typography>
                     <Typography variant="caption">{roadNameEnd}</Typography>
-                  </DirectionWrapper>
-                  <TravelTime>
+                  </Stack>
+                  <Stack
+                    alignItems="end"
+                    alignSelf="end"
+                    color={WHITE}
+                    direction="row"
+                    fontSize="1.2rem"
+                    fontWeight="400"
+                    gap={0.5}
+                  >
                     {travelTime}{" "}
                     <Typography
                       sx={{
@@ -66,8 +80,8 @@ const DelayedRoutes = () => {
                     >
                       min
                     </Typography>
-                  </TravelTime>
-                </TrafficStatus>
+                  </Stack>
+                </Stack>
               </TrafficStatusContainer>
             )
           )}
@@ -78,20 +92,7 @@ const DelayedRoutes = () => {
 };
 
 const Container = styled.div`
-  padding: 1.5rem;
-`;
-
-const CircleWrapper = styled.div`
-  ${FlexCenter};
-  justify-content: center;
-  height: 1rem;
-  width: 1rem;
-`;
-
-const DirectionWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  padding: 0.75rem 1.5rem;
 `;
 
 const TrafficLight = styled.div<{ $colour: string }>`
@@ -99,11 +100,6 @@ const TrafficLight = styled.div<{ $colour: string }>`
   border-radius: 50%;
   height: 0.625rem;
   width: 0.625rem;
-`;
-
-const TrafficStatus = styled.div`
-  ${FlexCenter};
-  gap: 0.5rem;
 `;
 
 const TrafficStatusContainer = styled.div`
@@ -114,13 +110,6 @@ const TrafficStatusContainer = styled.div`
   &:not(:first-child) {
     border-top: 1px solid ${DARK_GREY};
   }
-`;
-
-const TravelTime = styled.div`
-  align-self: end;
-  color: ${WHITE};
-  font-size: 1.2rem;
-  font-weight: 400;
 `;
 
 export default DelayedRoutes;
