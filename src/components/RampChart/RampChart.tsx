@@ -25,6 +25,7 @@ const RampChart = () => {
   const updateChartData = (ramps: Ramps) => {
     const counts = new Map<string, number>();
 
+    // I used a for loop for scalability in the event that ramps has a lot of data. Given the dataset I am working with the difference is negligible to foreach.
     for (let i = 0; i < ramps.length; i++) {
       const algorithm = ramps[i].algorithm;
       counts.set(algorithm, (counts.get(algorithm) || 0) + 1);

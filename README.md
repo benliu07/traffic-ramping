@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Reasons for Decisions
+
+I decided to use Material UI to cut down on the time I needed to spend styling the application, without having to write everything from scratch. Styled-components was used to customise some Material UI components whilst co-locating the styles.
+
+Mock JSON data for DelayedRoutes and the WeatherWidget were grouped under the `/mocks` folder to simulate backend data or API responses whilst utility functions like `getRampAlgorithms` was put under `/utils` for shared logic. I used a component based folder structure for separation of concerns and maintainability.
+
+Due to how frequently the ramp chart was being updated I decided to throttle the updates every 2500ms which gives a nicer user experience where the pie chart is able to animate whilst giving the user enough time to capture the numbers before the next batch of updates comes in. If the chart would receive a rapid burst of updates with a longer time of rest before the next batch of updates comes in then debounce would be more computationally efficient.
+
+I deployed the application via [surge.sh](https://surge.sh/) as it provides a quick deploy in seconds via the command line without needing to commit build artefacts into a dedicated repository. Here is the deployed link: [traffic-ramping.sh](https://traffic-ramping.surge.sh/).
+
 ## Available Scripts
 
 In the project directory, you can run:
