@@ -1,3 +1,7 @@
+import Grid from "@mui/material/Grid2";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { ReactNode } from "react";
 import { BsCloudSun, BsSun } from "react-icons/bs";
 import styled from "styled-components";
 
@@ -21,103 +25,70 @@ const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
   } = weather;
 
   return (
-    <WeatherContainer>
-      <LocationWeather>
-        <LocationDetails>
-          <City>Melbourne</City>
-          <Temperature>{temperature}&deg;</Temperature>
-          <Date>Tue 16th 3:46 PM</Date>
-        </LocationDetails>
-        <WeatherIcon>
-          <BsCloudSun size={"6rem"} />
-        </WeatherIcon>
-      </LocationWeather>
-      <WeatherStats>
-        <StatRow>
-          <StatName>Humidity</StatName>
-          <StatValue>{humidity}%</StatValue>
-        </StatRow>
-        <StatRow>
-          <StatName>Chance of Rain</StatName>
-          <StatValue>{chanceOfRain}%</StatValue>
-        </StatRow>
-        <StatRow>
-          <StatName>Wind</StatName>
-          <StatValue>
-            {windSpeed} <Unit>kmh</Unit>
-          </StatValue>
-        </StatRow>
-        <StatRow>
-          <StatName>Tomorrow</StatName>
-          <StatValue>
-            {tomorrowTemperature}&deg; <BsSun />
-          </StatValue>
-        </StatRow>
-      </WeatherStats>
-    </WeatherContainer>
+    <Grid container padding="1.5rem" rowSpacing={4} textAlign="center">
+      <Grid display="flex" gap={1} size={12}>
+        <Grid alignContent="end" size={6}>
+          <Typography fontWeight="100" lineHeight={1} variant="h6">
+            Melbourne
+          </Typography>
+          <Typography fontWeight="light" variant="h2">
+            {temperature}&deg;
+          </Typography>
+          <Typography fontWeight="light" variant="body2">
+            Tue 16th 3:46 PM
+          </Typography>
+        </Grid>
+        <Grid size={6}>
+          <BsCloudSun size={"7rem"} />
+        </Grid>
+      </Grid>
+      <Stack direction="column" flex="auto" textAlign="left">
+        <WeatherStack title="Humidity">{humidity}%</WeatherStack>
+        <WeatherStack title="Chance of Rain">{chanceOfRain}%</WeatherStack>
+        <WeatherStack title="Wind">
+          {windSpeed}{" "}
+          <Typography component="span" fontWeight="100" variant="body2">
+            km/h
+          </Typography>
+        </WeatherStack>
+        <WeatherStack title="Tomorrow">
+          {tomorrowTemperature}&deg; <BsSun />
+        </WeatherStack>
+      </Stack>
+    </Grid>
   );
 };
 
 export default WeatherWidget;
 
-const City = styled.div`
-  font-weight: 100;
+const WeatherStack = ({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title: string;
+}) => {
+  return (
+    <Stack alignItems="center" direction="row" gap={1}>
+      <StyledTypography fontWeight="100" variant="body1">
+        {title}
+      </StyledTypography>
+      <BoldTypography variant="h6">{children}</BoldTypography>
+    </Stack>
+  );
+};
+
+const BoldTypography = styled(Typography)`
+  flex: 3;
+  font-weight: 400;
 `;
 
-const Date = styled.div`
-  font-size: 0.75rem;
-  font-weight: 100;
-`;
-
-const LocationDetails = styled.div`
-  text-align: center;
-`;
-
-const LocationWeather = styled.div`
-  align-items: center;
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-`;
-
-const StatName = styled.div`
-  font-weight: 100;
-  width: 120px;
-`;
-
-const StatRow = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 2fr 1fr;
-`;
-
-const StatValue = styled.div``;
-
-const Temperature = styled.div`
-  font-size: 3.25rem;
-`;
-
-const Unit = styled.span`
-  font-weight: 100;
-`;
-
-const WeatherContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-self: start;
-  padding: 1.5rem;
+const StyledTypography = styled(Typography)`
+  flex: 5;
+  line-height: 2;
+  padding-left: 0.5rem;
 
   @media (max-width: 480px) {
-    justify-self: center;
+    padding-left: 10%;
   }
-`;
-
-const WeatherIcon = styled.div``;
-
-const WeatherStats = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 `;

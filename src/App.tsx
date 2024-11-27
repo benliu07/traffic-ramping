@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { Dashboard } from "./pages";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MEDIUM_GREY } from "./utils/commonStyles";
@@ -18,11 +18,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AppContainer>
-        <main>
-          <Dashboard />
-        </main>
-      </AppContainer>
+      <main>
+        <Dashboard />
+      </main>
     </ThemeProvider>
   );
 }
@@ -37,12 +35,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`;
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 `;
 
 export default App;

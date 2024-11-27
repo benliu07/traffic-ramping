@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
-import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -9,7 +8,6 @@ import throttle from "lodash.throttle";
 
 import getRampAlgorithms, { Ramps } from "../../mocks/getRampAlgorithms";
 import {
-  DARK_GREY,
   DEFAULT_BACKGROUND_COLOUR,
   LIGHT_GREY,
   PIE_CHART_COLOURS,
@@ -122,7 +120,7 @@ const Container = styled.div`
 
 const ChartWrapper = styled.div`
   align-items: center;
-  background-color: #171d27;
+  background-color: ${DEFAULT_BACKGROUND_COLOUR};
   display: flex;
   justify-content: center;
   padding: 1rem;
