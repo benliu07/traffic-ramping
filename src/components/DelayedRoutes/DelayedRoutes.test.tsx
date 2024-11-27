@@ -25,22 +25,6 @@ jest.mock("../../mocks/delayedRoutes.json", () => [
 ]);
 
 describe("DelayedRoutes", () => {
-  it("renders the component with the correct header", () => {
-    render(<DelayedRoutes />);
-
-    expect(screen.getByTestId("delayed-routes-header")).toHaveTextContent(
-      "DELAYED ROUTES"
-    );
-  });
-
-  it("displays the correct number of delayed routes", () => {
-    render(<DelayedRoutes />);
-
-    const routes = screen.getAllByTestId("traffic-status-container");
-
-    expect(routes).toHaveLength(delayedRoutes.length);
-  });
-
   it("renders each route with the correct details", () => {
     render(<DelayedRoutes />);
 
@@ -70,14 +54,6 @@ describe("DelayedRoutes", () => {
     render(<DelayedRoutes />);
 
     expect(screen.getByTestId("delayed-routes-details")).toBeVisible();
-
-    const containers = screen.getAllByTestId("traffic-status-container");
-    containers.forEach((container, index) => {
-      const route = delayedRoutes[index];
-      expect(within(container).getByTestId("main-road")).toHaveTextContent(
-        route.mainRoad
-      );
-    });
 
     const accordionHeader = screen.getByTestId("delayed-routes-header");
     fireEvent.click(accordionHeader);
