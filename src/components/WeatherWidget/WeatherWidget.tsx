@@ -11,13 +11,13 @@ interface WeatherWidgetProps {
   };
 }
 
-export const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
+const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
   const {
-    temperature,
-    humidity,
     chanceOfRain,
-    windSpeed,
+    humidity,
+    temperature,
     tomorrowTemperature,
+    windSpeed,
   } = weather;
 
   return (
@@ -58,13 +58,15 @@ export const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
   );
 };
 
+export default WeatherWidget;
+
 const City = styled.div`
   font-weight: 100;
 `;
 
 const Date = styled.div`
-  font-weight: 100;
   font-size: 0.75rem;
+  font-weight: 100;
 `;
 
 const LocationDetails = styled.div`
@@ -85,8 +87,8 @@ const StatName = styled.div`
 
 const StatRow = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
   grid-gap: 1rem;
+  grid-template-columns: 2fr 1fr;
 `;
 
 const StatValue = styled.div``;
@@ -103,7 +105,12 @@ const WeatherContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  justify-self: start;
   padding: 1.5rem;
+
+  @media (max-width: 480px) {
+    justify-self: center;
+  }
 `;
 
 const WeatherIcon = styled.div``;

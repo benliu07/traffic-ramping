@@ -1,24 +1,26 @@
 import styled from "styled-components";
 
-import { WeatherWidget } from "../components/WeatherWidget";
+import WeatherWidget from "../components/WeatherWidget";
 import * as weather from "../mocks/weather.json";
 import DelayedRoutes from "../components/DelayedRoutes";
+import RampChart from "../components/RampChart";
 
 export const Dashboard = () => {
   return (
-    <DashboardContainer>
+    <Sidebar>
       <WeatherWidget weather={weather} />
       <DelayedRoutes />
-      <div>3rd Part</div>
-    </DashboardContainer>
+      <RampChart />
+    </Sidebar>
   );
 };
 
-const DashboardContainer = styled.div`
+const Sidebar = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 300px;
+  grid-template-rows: repeat(3, auto);
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 480px) {
+    grid-template-columns: auto;
   }
 `;

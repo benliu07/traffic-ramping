@@ -1,11 +1,18 @@
-import Accordion from "@mui/material/Accordion";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styled, { css } from "styled-components";
+import Typography from "@mui/material/Typography";
 import { BsArrowDown } from "react-icons/bs";
+import styled from "styled-components";
 
 import delayedRoutes from "../../mocks/delayedRoutes.json";
+import {
+  DARK_GREY,
+  FlexCenter,
+  LIGHT_GREY,
+  StyledAccordion,
+  WHITE,
+} from "../../utils/commonStyles";
 
 const DelayedRoutes = () => {
   return (
@@ -13,7 +20,7 @@ const DelayedRoutes = () => {
       <StyledAccordion defaultExpanded>
         <AccordionSummary
           aria-controls="delayed-routes-content"
-          expandIcon={<ExpandMoreIcon sx={{ color: "#979ca2" }} />}
+          expandIcon={<ExpandMoreIcon sx={{ color: LIGHT_GREY }} />}
           id="delayed-routes-header"
         >
           DELAYED ROUTES
@@ -32,19 +39,33 @@ const DelayedRoutes = () => {
               <TrafficStatusContainer key={id}>
                 <TrafficStatus>
                   <CircleWrapper>
-                    <TrafficLight colour={trafficStatus} />
+                    <TrafficLight $colour={trafficStatus} />
                   </CircleWrapper>
-                  <Text type="main-road">{mainRoad}</Text>
-                  <Text type="distance">{distance}km</Text>
+                  <Typography
+                    sx={{ color: LIGHT_GREY, flex: 1 }}
+                    variant="body1"
+                  >
+                    {mainRoad}
+                  </Typography>
+                  <Typography variant="caption">{distance}km</Typography>
                 </TrafficStatus>
                 <TrafficStatus>
                   <BsArrowDown />
                   <DirectionWrapper>
-                    <Text type="road-name">{roadNameStart}</Text>
-                    <Text type="road-name">{roadNameEnd}</Text>
+                    <Typography variant="caption">{roadNameStart}</Typography>
+                    <Typography variant="caption">{roadNameEnd}</Typography>
                   </DirectionWrapper>
                   <TravelTime>
-                    {travelTime} <Unit>min</Unit>
+                    {travelTime}{" "}
+                    <Typography
+                      sx={{
+                        color: WHITE,
+                        fontWeight: 300,
+                      }}
+                      variant="caption"
+                    >
+                      min
+                    </Typography>
                   </TravelTime>
                 </TrafficStatus>
               </TrafficStatusContainer>
@@ -56,105 +77,50 @@ const DelayedRoutes = () => {
   );
 };
 
-const FlexCenter = css`
-  display: flex;
-  align-items: center;
-`;
-
 const Container = styled.div`
   padding: 1.5rem;
 `;
 
 const CircleWrapper = styled.div`
+  ${FlexCenter};
   justify-content: center;
   height: 1rem;
   width: 1rem;
-  ${FlexCenter};
 `;
 
 const DirectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 4px;
 `;
 
-const SmallText = css`
-  font-size: 0.75rem;
-`;
-
-const StyledAccordion = styled(Accordion)`
-  && {
-    background-color: #171d27;
-    color: #979ca2;
-  }
-
-  .MuiAccordionDetails-root {
-    padding: 0;
-  }
-
-  .MuiAccordionSummary-root.Mui-expanded {
-    min-height: 48px;
-  }
-
-  .MuiAccordionSummary-content.Mui-expanded {
-    margin: 8px 0;
-  }
-`;
-
-const Text = styled.div<{ type: string }>`
-  ${({ type }) => {
-    switch (type) {
-      case "main-road":
-        return css`
-          color: #979ca2;
-          flex: 1;
-        `;
-      case "distance":
-        return css`
-          color: #424953;
-          ${SmallText};
-        `;
-      case "road-name":
-        return css`
-          color: #727981;
-          ${SmallText};
-        `;
-      default:
-        return "";
-    }
-  }}
-`;
-
-const TrafficLight = styled.div<{ colour: string }>`
-  background-color: ${({ colour }) => colour && colour};
+const TrafficLight = styled.div<{ $colour: string }>`
+  background-color: ${({ $colour }) => $colour && $colour};
   border-radius: 50%;
-  height: 0.75rem;
-  width: 0.75rem;
+  height: 0.625rem;
+  width: 0.625rem;
 `;
 
 const TrafficStatus = styled.div`
   ${FlexCenter};
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const TrafficStatusContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #1c232d;
-  gap: 8px;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
+
+  &:not(:first-child) {
+    border-top: 1px solid ${DARK_GREY};
+  }
 `;
 
 const TravelTime = styled.div`
-  color: white;
+  align-self: end;
+  color: ${WHITE};
   font-size: 1.2rem;
   font-weight: 400;
-`;
-
-const Unit = styled.span`
-  ${SmallText};
-  font-weight: 300;
 `;
 
 export default DelayedRoutes;

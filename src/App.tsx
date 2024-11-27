@@ -1,26 +1,33 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Dashboard } from "./pages";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { MEDIUM_GREY } from "./utils/commonStyles";
+
+const theme = createTheme({
+  typography: {
+    caption: {
+      color: MEDIUM_GREY,
+      fontSize: "0.75rem",
+      lineHeight: "1.3",
+    },
+  },
+});
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <AppContainer>
-        <Header>
-          <Title>Traffic Ramping Dashboard</Title>
-        </Header>
         <main>
           <Dashboard />
         </main>
       </AppContainer>
-    </>
+    </ThemeProvider>
   );
 }
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
-
   body {
     background-color: #121212;
     box-sizing: border-box;
@@ -33,24 +40,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
-  background-color: #121212;
-  color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100vh;
-`;
-
-const Header = styled.header`
-  background-color: #1e1e2e;
-  border-bottom: 2px solid #333;
-  padding: 1rem;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  color: #ffffff;
-  font-size: 1.5rem;
-  margin: 0;
 `;
 
 export default App;
