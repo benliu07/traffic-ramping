@@ -30,6 +30,8 @@ const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
     <Grid
       container
       data-testid="weather-widget"
+      justifySelf="center"
+      maxWidth={300}
       rowSpacing={4}
       textAlign="center"
     >
@@ -107,9 +109,5 @@ const BoldTypography = styled(Typography)`
 const StyledTypography = styled(Typography)`
   flex: 5;
   line-height: 2;
-  padding-left: 0.5rem;
-
-  @media (max-width: 480px) {
-    padding-left: 10%;
-  }
+  padding-left: 1.2rem;
 `;
