@@ -23,6 +23,7 @@ const RampChart = () => {
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
   const updateChartData = (ramps: Ramps) => {
+    // Store ramp algorithms in a Map (similar to a hashmap) for efficient lookups and updates, we want to track the occurences for each algorithm in a key value pair
     const counts = new Map<string, number>();
 
     ramps.forEach(({ algorithm }) => {
@@ -37,6 +38,7 @@ const RampChart = () => {
     setChartData(chartData);
   };
 
+  // Throttling the update to the chart data every 2.5 seconds to prevent excessive updates as data changes rapidly
   const throttledUpdateChartData = useCallback(
     throttle((ramps: Ramps) => {
       updateChartData(ramps);
@@ -49,8 +51,10 @@ const RampChart = () => {
       throttledUpdateChartData(newRamps);
     };
 
+    // Set up the interval to fetch ramp algorithms and store the reference
     intervalRef.current = getRampAlgorithms(onUpdate);
 
+    // Cleanup function to clear the interval and cancel the throttled function on unmount to prevent memory leaks
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
