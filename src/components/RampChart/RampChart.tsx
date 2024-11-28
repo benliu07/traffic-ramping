@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styled from "styled-components";
 import throttle from "lodash.throttle";
+import styled from "styled-components";
 
 import {
   ACCORDION_BACKGROUND_COLOUR,
@@ -71,7 +71,13 @@ const RampChart = () => {
         </AccordionSummary>
         <AccordionDetails>
           <ChartWrapper>
-            <PieChartDisplay chartData={chartData} />
+            <PieChartDisplay
+              chartData={chartData}
+              height={250}
+              innerRadius={60}
+              outerRadius={90}
+              width={250}
+            />
           </ChartWrapper>
         </AccordionDetails>
       </StyledAccordion>

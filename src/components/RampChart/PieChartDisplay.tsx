@@ -3,7 +3,21 @@ import { PieChart, Pie, Cell } from "recharts";
 import { PIE_CHART_COLOURS } from "../../utils/commonStyles";
 import { ChartData } from "./RampChart";
 
-export const PieChartDisplay = ({ chartData }: { chartData: ChartData[] }) => {
+interface PieChartDisplayProps {
+  chartData: ChartData[];
+  height: number;
+  innerRadius: number;
+  outerRadius: number;
+  width: number;
+}
+
+export const PieChartDisplay = ({
+  chartData,
+  height,
+  innerRadius,
+  outerRadius,
+  width,
+}: PieChartDisplayProps) => {
   const total = chartData.reduce((sum, { value }) => sum + value, 0);
 
   const renderChartLabel = ({
@@ -35,7 +49,7 @@ export const PieChartDisplay = ({ chartData }: { chartData: ChartData[] }) => {
   };
 
   return (
-    <PieChart width={250} height={250}>
+    <PieChart width={width} height={height}>
       <Pie
         animationDuration={500}
         animationEasing="ease-in-out"
@@ -43,15 +57,15 @@ export const PieChartDisplay = ({ chartData }: { chartData: ChartData[] }) => {
         cy="50%"
         data={chartData}
         dataKey="value"
-        innerRadius={60}
+        innerRadius={innerRadius}
         label={renderChartLabel}
         labelLine={false}
-        outerRadius={90}
+        outerRadius={outerRadius}
       >
-        {chartData.map((_, index) => (
+        {chartData.map(({ name }, index) => (
           <Cell
             fill={PIE_CHART_COLOURS[index % PIE_CHART_COLOURS.length]}
-            key={`cell-${index}`}
+            key={`cell-${name}`}
           />
         ))}
       </Pie>

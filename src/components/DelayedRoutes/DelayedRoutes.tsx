@@ -1,6 +1,7 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { BsArrowDown } from "react-icons/bs";
 import styled from "styled-components";
@@ -12,7 +13,6 @@ import {
   StyledAccordion,
   WHITE,
 } from "../../utils/commonStyles";
-import Stack from "@mui/material/Stack";
 
 const DelayedRoutes = () => {
   return (

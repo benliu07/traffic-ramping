@@ -1,7 +1,7 @@
-import React from "react";
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import DelayedRoutes from "./DelayedRoutes";
+
 import delayedRoutes from "../../mocks/delayedRoutes.json";
+import DelayedRoutes from "./DelayedRoutes";
 
 jest.mock("../../mocks/delayedRoutes.json", () => [
   {
