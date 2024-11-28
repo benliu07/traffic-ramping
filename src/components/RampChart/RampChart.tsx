@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import { useCallback, useEffect, useRef, useState } from "react";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -9,27 +8,26 @@ import throttle from "lodash.throttle";
 import {
   ACCORDION_BACKGROUND_COLOUR,
   LIGHT_GREY,
-  PIE_CHART_COLOURS,
   StyledAccordion,
 } from "../../utils/commonStyles";
 import getRampAlgorithms, { Ramps } from "../../utils/getRampAlgorithms";
+import { PieChartDisplay } from "./PieChartDisplay";
 
-interface ChartData {
+export interface ChartData {
   name: string;
   value: number;
 }
 
 const RampChart = () => {
+  const intervalRef = useRef<NodeJS.Timer | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
   const updateChartData = (ramps: Ramps) => {
     const counts = new Map<string, number>();
 
-    // I used a for loop for scalability in the event that ramps has a lot of data. Given the dataset I am working with the difference is negligible to foreach.
-    for (let i = 0; i < ramps.length; i++) {
-      const algorithm = ramps[i].algorithm;
+    ramps.forEach(({ algorithm }) => {
       counts.set(algorithm, (counts.get(algorithm) || 0) + 1);
-    }
+    });
 
     const chartData = Array.from(counts.entries()).map(([name, value]) => ({
       name,
@@ -51,18 +49,18 @@ const RampChart = () => {
       throttledUpdateChartData(newRamps);
     };
 
-    const intervalId = getRampAlgorithms(onUpdate);
+    intervalRef.current = getRampAlgorithms(onUpdate);
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
       throttledUpdateChartData.cancel();
     };
   }, [throttledUpdateChartData]);
 
-  const total = chartData.reduce((sum, { value }) => sum + value, 0);
-
   return (
-    <Container>
+    <div>
       <StyledAccordion defaultExpanded>
         <AccordionSummary
           aria-controls="delayed-routes-content"
@@ -73,60 +71,13 @@ const RampChart = () => {
         </AccordionSummary>
         <AccordionDetails>
           <ChartWrapper>
-            <PieChart width={250} height={250}>
-              <Pie
-                animationDuration={500}
-                animationEasing="ease-in-out"
-                cx="50%"
-                cy="50%"
-                data={chartData}
-                dataKey="value"
-                innerRadius={60}
-                label={({ x, y, index }) => {
-                  const percentage = total
-                    ? Math.round((chartData[index].value / total) * 100)
-                    : 0;
-
-                  return (
-                    <text
-                      dominantBaseline="central"
-                      fill={PIE_CHART_COLOURS[index % PIE_CHART_COLOURS.length]}
-                      fontSize={"1rem"}
-                      fontWeight="bold"
-                      textAnchor="middle"
-                      x={x}
-                      y={y}
-                    >
-                      {percentage}%
-                    </text>
-                  );
-                }}
-                labelLine={false}
-                outerRadius={90}
-              >
-                {chartData.map((_, index) => (
-                  <Cell
-                    fill={PIE_CHART_COLOURS[index % PIE_CHART_COLOURS.length]}
-                    key={`cell-${index}`}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <PieChartDisplay chartData={chartData} />
           </ChartWrapper>
         </AccordionDetails>
       </StyledAccordion>
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div`
-  max-width: 400px;
-  padding: 0.75rem 1.5rem 1.5rem;
-
-  @media (max-width: 768px) {
-    max-width: none;
-  }
-`;
 
 const ChartWrapper = styled.div`
   align-items: center;
