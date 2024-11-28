@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 
 const DelayedRoutes = () => {
   return (
-    <Container data-testid="delayed-routes-container">
+    <div data-testid="delayed-routes-container">
       <StyledAccordion defaultExpanded>
         <AccordionSummary
           aria-controls="delayed-routes-content"
@@ -99,13 +99,9 @@ const DelayedRoutes = () => {
           )}
         </AccordionDetails>
       </StyledAccordion>
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div`
-  padding: 0.75rem 1.5rem;
-`;
 
 const TrafficLight = styled.div<{ $colour: string }>`
   background-color: ${({ $colour }) => $colour && $colour};

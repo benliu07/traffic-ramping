@@ -30,7 +30,6 @@ const WeatherWidget = ({ weather }: WeatherWidgetProps) => {
     <Grid
       container
       data-testid="weather-widget"
-      padding="1.5rem"
       rowSpacing={4}
       textAlign="center"
     >

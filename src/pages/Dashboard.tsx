@@ -15,10 +15,12 @@ export const Dashboard = () => {
   );
 };
 
-const Sidebar = styled.div`
+const Sidebar = styled.aside`
   display: grid;
+  gap: 1.5rem;
   grid-template-columns: 300px;
   grid-template-rows: repeat(3, auto);
+  padding: 1.5rem;
 
   @media (max-width: 480px) {
     grid-template-columns: auto;
