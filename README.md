@@ -14,11 +14,11 @@ I deployed the application via [surge.sh](https://surge.sh/) as it provides a qu
 
 ## Compromises due to time constraints
 
-Stopping the ramp chart from re-rendering when the ramp chart accordion is closed.
+Preventing the ramp chart from re-rendering when its accordion is closed was not implemented.
 
-Including Storybook tests for visual regression testing in the future for a production grade application is ideal.
+Incorporating Storybook for visual regression testing would enhance testing for a production-grade application.
 
-Adding more support for accessbility features.
+Adding more accessibility features is a priority for future improvements to ensure a better user experience.
 
 ## Available Scripts
 
