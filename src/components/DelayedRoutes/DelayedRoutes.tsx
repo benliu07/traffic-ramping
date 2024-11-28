@@ -16,7 +16,7 @@ import {
 
 const DelayedRoutes = () => {
   return (
-    <div data-testid="delayed-routes-container">
+    <section data-testid="delayed-routes-container">
       <StyledAccordion defaultExpanded>
         <AccordionSummary
           aria-controls="delayed-routes-content"
@@ -99,7 +99,7 @@ const DelayedRoutes = () => {
           )}
         </AccordionDetails>
       </StyledAccordion>
-    </div>
+    </section>
   );
 };
 

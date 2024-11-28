@@ -60,7 +60,7 @@ const RampChart = () => {
   }, [throttledUpdateChartData]);
 
   return (
-    <div>
+    <section data-testid="ramp-chart-container">
       <StyledAccordion defaultExpanded>
         <AccordionSummary
           aria-controls="delayed-routes-content"
@@ -81,7 +81,7 @@ const RampChart = () => {
           </ChartWrapper>
         </AccordionDetails>
       </StyledAccordion>
-    </div>
+    </section>
   );
 };
 
